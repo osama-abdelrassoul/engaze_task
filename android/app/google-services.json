@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "155934083768",
+    "project_id": "engaz-task",
+    "storage_bucket": "engaz-task.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155934083768:android:f235b8086e7e992130424d",
+        "android_client_info": {
+          "package_name": "com.example.engaze_task"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155934083768-rn3t18m9d4sfc84ng0mom9vh01dc7j6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFQu01Bu2nM6nrILxdlKMHmQ3YxeceXMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155934083768-rn3t18m9d4sfc84ng0mom9vh01dc7j6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
