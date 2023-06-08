@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/utilities/utilities.dart';
-
 import '../../../common/custom_button.dart';
 import '../../../common/custom_text_field.dart';
 
@@ -33,7 +31,7 @@ class LoginView extends StatelessWidget {
           Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (BuildContext context) {
-                return HomeScreen();
+                return const HomeScreen();
               },
             ),
             (_) => false,
@@ -69,7 +67,7 @@ class _LoginForm extends StatelessWidget {
                 children: [
                   const TopBarLogin(),
                   SizedBox(
-                    height: Utilities.screenHeight * 0.15,
+                    height: MediaQuery.of(context).size.height * 0.15,
                   ),
                   Form(
                     key: _signInFormKey,
