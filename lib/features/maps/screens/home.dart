@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../../login/bloc/login_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,7 +20,6 @@ class _HomeScreenState extends State<HomeScreen> {
   String lat = '';
   String long = "";
   String locationMessage = "Current Location of the User";
-  final Completer<GoogleMapController> _controller = Completer();
   FirebaseDatabase database = FirebaseDatabase.instance;
 
   Future<Position> _getCurrentLocation() async {
@@ -41,13 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
       return Future.error(
           "Location Permission are permantly denied, we cannot request for permission");
     }
-    print("Latitude: $lat , Longitude: $long");
+
     return await Geolocator.getCurrentPosition(
         forceAndroidLocationManager: true);
   }
 
   @override
   void initState() {
+    _getCurrentLocation();
     getlocation();
     super.initState();
   }
@@ -72,7 +70,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
-        DatabaseReference ref = FirebaseDatabase.instance.ref(state.user.id);
         context
             .read<MarkerBloc>()
             .add(GetMarkerDataEvent(userToken: state.user.userToken));
@@ -81,21 +78,12 @@ class _HomeScreenState extends State<HomeScreen> {
             title: const Text("Home Screen"),
           ),
           body: Center(
-            child: Column(children: [
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(locationMessage),
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    setState(() async {
-                      await ref.set({
-                        "latitude": lat,
-                        "longitude": long,
-                      });
-                    });
-                  },
-                  child: const Text("get Current Location")),
               const SizedBox(
                 height: 20,
               ),

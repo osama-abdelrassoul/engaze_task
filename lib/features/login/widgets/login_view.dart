@@ -6,6 +6,7 @@ import '../../../../core/utilities/utilities.dart';
 import '../../../common/custom_button.dart';
 import '../../../common/custom_text_field.dart';
 
+import '../../../common/top_bar_login.dart';
 import '../../maps/screens/home.dart';
 import '../bloc/login_bloc.dart';
 
@@ -66,6 +67,7 @@ class _LoginForm extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  const TopBarLogin(),
                   SizedBox(
                     height: Utilities.screenHeight * 0.15,
                   ),

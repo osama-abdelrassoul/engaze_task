@@ -26,12 +26,18 @@ class _MapScreenState extends State<MapScreen> {
   );
 
   void getCurrentLocation() async {
-    StreamSubscription<Position> positionStream =
-        Geolocator.getPositionStream(locationSettings: locationSettings)
-            .listen((Position? position) {
-      print(position == null
-          ? 'Unknown'
-          : '${position.latitude.toString()}, ${position.longitude.toString()}');
+    DatabaseReference ref = FirebaseDatabase.instance.ref(widget.userId);
+
+    LocationSettings locationSettings = const LocationSettings(
+        accuracy: LocationAccuracy.high, distanceFilter: 100);
+    Geolocator.getPositionStream(locationSettings: locationSettings)
+        .listen((Position position) async {
+      await ref.set({
+        "latitude": position.latitude.toString(),
+        "longitude": position.longitude.toString(),
+      });
+      widget.lat = position.latitude.toString();
+      widget.long = position.longitude.toString();
     });
   }
 
@@ -43,8 +49,6 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DatabaseReference ref = FirebaseDatabase.instance.ref(widget.userId);
-
     return Scaffold(
       body: BlocBuilder<MarkerBloc, MarkerState>(
         builder: (context, state) {
@@ -85,21 +89,7 @@ class _MapScreenState extends State<MapScreen> {
             ),
             markers: Set<Marker>.of(markerList),
             polylines: createPolylines(),
-            onCameraMove: (position) async {
-              await ref.set({
-                "latitude": widget.lat,
-                "longitude": widget.long,
-              });
-              LocationSettings locationSettings = const LocationSettings(
-                  accuracy: LocationAccuracy.high, distanceFilter: 100);
-              Geolocator.getPositionStream(locationSettings: locationSettings)
-                  .listen((Position position) async {
-                widget.lat = position.latitude.toString();
-                widget.long = position.longitude.toString();
-              });
-            },
-            onCameraIdle: () async {},
-            onTap: (argument) => getCurrentLocation,
+            onCameraMove: (position) async {},
           );
         },
       ),
