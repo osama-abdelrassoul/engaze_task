@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:engaze_task/features/maps/screens/map_screen.dart';
 import 'package:engaze_task/features/marker_bloc/marker_bloc.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -20,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   String lat = '';
   String long = "";
   String locationMessage = "Current Location of the User";
-  FirebaseDatabase database = FirebaseDatabase.instance;
 
   Future<Position> _getCurrentLocation() async {
     bool serviceEnebled = await Geolocator.isLocationServiceEnabled();
