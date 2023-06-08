@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +27,7 @@ class _MapScreenState extends State<MapScreen> {
     DatabaseReference ref = FirebaseDatabase.instance.ref(widget.userId);
 
     LocationSettings locationSettings = const LocationSettings(
-        accuracy: LocationAccuracy.high, distanceFilter: 100);
+        accuracy: LocationAccuracy.best, distanceFilter: 100);
     Geolocator.getPositionStream(locationSettings: locationSettings)
         .listen((Position position) async {
       await ref.set({
