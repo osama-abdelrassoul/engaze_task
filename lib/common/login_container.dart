@@ -13,7 +13,7 @@ class LoginContainer extends StatelessWidget {
       width: MediaQuery.of(context).size.width / 1.2,
       padding: const EdgeInsets.symmetric(horizontal: 13),
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.blueAccent, width: 3),
+          border: Border.all(color: Colors.brown, width: 3),
           borderRadius: BorderRadius.circular(50),
           color: Colors.grey[300]),
       child: Center(child: child),
